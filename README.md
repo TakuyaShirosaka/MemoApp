@@ -15,6 +15,7 @@ gradlew.bat run
 # 実行(Linux)
 ``
 ./gradlew run
+``
 
 ![img.png](img.png)
 
