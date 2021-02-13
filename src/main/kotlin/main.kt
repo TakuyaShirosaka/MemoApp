@@ -1,10 +1,13 @@
 import androidx.compose.desktop.AppManager
 import androidx.compose.desktop.Window
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.key.Key
@@ -17,6 +20,7 @@ import androidx.compose.ui.window.MenuItem
 import java.io.File
 import javax.swing.JFileChooser
 import javax.swing.filechooser.FileNameExtensionFilter
+
 
 fun main() {
     val text = mutableStateOf("")
@@ -95,28 +99,46 @@ fun main() {
     @Composable
     fun showAlertDialog() {
         if (suspendedFunction.value != null) {
-            AlertDialog(
-                onDismissRequest = {},
-                confirmButton = {
-                    Button(onClick = {
-                        save()
-                        suspendedFunction.value?.invoke()
-                        suspendedFunction.value = null
-                    }) { Text("はい") }
-                },
-                dismissButton = {
-                    Button(
-                        onClick = {
-                            modified.value = false
-                            suspendedFunction.value?.invoke()
+            MaterialTheme {
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    // ダイアログ表示コンポーネント、
+                    // 中身で構造が決められてるのでデザインは期待できない
+                    AlertDialog(
+                        onDismissRequest = {
                             suspendedFunction.value = null
+                        },
+                        title = {
+                            Text(text = "保存しますか？")
+                        },
+                        text = {
+                            Text("編集中に他のファイルを開いたりしたときの警告ダイアログ")
+                        },
+                        confirmButton = {
+                            Button(
+                                onClick = {
+                                    save()
+                                    suspendedFunction.value?.invoke()
+                                    suspendedFunction.value = null
+                                }) { Text("はい") }
+                        },
+                        dismissButton = {
+                            Button(
+                                onClick = {
+                                    modified.value = false
+                                    suspendedFunction.value?.invoke()
+                                    suspendedFunction.value = null
+                                }
+                            ) {
+                                Text("いいえ")
+                            }
                         }
-                    ) {
-                        Text("いいえ")
-                    }
-                },
-                text = { Text("保存しますか？") }
-            )
+                    )
+                }
+            }
         }
     }
 
