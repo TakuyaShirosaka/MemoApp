@@ -1,10 +1,7 @@
 # MemoApp
 Compose for Desktopで作るメモ帳
+
 他の人が作ったものを参考にしてますが、ところどころ自分なりに修正しています。
-
-![img.png](img.png)
-
-![img_1.png](img_1.png)
 
 # 環境
 IDE:IntelliJ
@@ -19,8 +16,11 @@ gradlew.bat run
 ``
 ./gradlew run
 
+![img.png](img.png)
 
+![img_1.png](img_1.png)
 
+![img_2.png](img_2.png)
 
 
 
