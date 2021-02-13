@@ -5,6 +5,7 @@ Compose for Desktopで作るメモ帳
 
 # 環境
 IDE:IntelliJ
+
 JDK:Corretto-11.0.3.7.1
 
 # 実行(WINDOWS)
